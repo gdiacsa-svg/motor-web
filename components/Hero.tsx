@@ -10,7 +10,6 @@ export default function Hero() {
       {/* Destellos solares (lens flare) */}
       <div className="flares" aria-hidden="true">
         <div className="flare f1" /><div className="flare f2" /><div className="flare f3" />
-        <div className="flare f4" /><div className="flare f5" /><div className="flare f6" />
       </div>
 
       {/* Destellos pequeños (sparkles) */}

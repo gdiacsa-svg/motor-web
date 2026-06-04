@@ -9,12 +9,12 @@ const stats = [
 ];
 
 const DURATION = 2000;
-const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3);
 
 export default function Counters() {
   const sectionRef = useRef<HTMLElement>(null);
-  const [counts, setCounts] = useState(stats.map(() => 0));
+  const [counts, setCounts] = useState<number[]>([0, 0, 0, 0]);
   const hasRun = useRef(false);
+  const rafRef = useRef<number>(0);
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -26,20 +26,32 @@ export default function Counters() {
         hasRun.current = true;
         observer.disconnect();
 
-        const start = performance.now();
-        const tick = (now: number) => {
-          const t = Math.min((now - start) / DURATION, 1);
-          const progress = easeOutCubic(t);
-          setCounts(stats.map(s => Math.round(s.end * progress)));
-          if (t < 1) requestAnimationFrame(tick);
+        const startTime = Date.now();
+
+        const animate = () => {
+          const elapsed = Date.now() - startTime;
+          const progress = Math.min(elapsed / DURATION, 1);
+          const eased = 1 - Math.pow(1 - progress, 3);
+
+          setCounts(stats.map(s => Math.min(Math.floor(eased * s.end), s.end)));
+
+          if (progress < 1) {
+            rafRef.current = requestAnimationFrame(animate);
+          } else {
+            setCounts(stats.map(s => s.end));
+          }
         };
-        requestAnimationFrame(tick);
+
+        rafRef.current = requestAnimationFrame(animate);
       },
       { threshold: 0.3 }
     );
 
     observer.observe(section);
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+      cancelAnimationFrame(rafRef.current);
+    };
   }, []);
 
   return (

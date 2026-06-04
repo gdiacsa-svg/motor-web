@@ -11,16 +11,8 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  const close = () => {
-    setOpen(false);
-    document.body.style.overflow = '';
-  };
-
-  const toggle = () => {
-    const next = !open;
-    setOpen(next);
-    document.body.style.overflow = next ? 'hidden' : '';
-  };
+  const close = () => setOpen(false);
+  const toggle = () => setOpen(prev => !prev);
 
   return (
     <>
