@@ -37,6 +37,7 @@ export default function About() {
 
           <div className="mv-stack r d2">
             <div className="mv">
+              <img src="/mision.png" alt="" aria-hidden="true" style={{width:'100%',height:'200px',objectFit:'cover',borderRadius:'8px 8px 0 0',display:'block'}} />
               <p className="mv-tag">Misión</p>
               <h3>Transformar recursos naturales en infraestructura que impulse a México</h3>
               <p>
@@ -46,6 +47,7 @@ export default function About() {
               </p>
             </div>
             <div className="mv">
+              <img src="/vision.png" alt="" aria-hidden="true" style={{width:'100%',height:'200px',objectFit:'cover',borderRadius:'8px 8px 0 0',display:'block'}} />
               <p className="mv-tag">Visión</p>
               <h3>Ser el referente nacional en energía solar e hidráulica</h3>
               <p>

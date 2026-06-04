@@ -21,6 +21,10 @@ export const metadata: Metadata = {
   title: 'Tecnoservicios Mator S.A. de C.V. | Energía Solar e Infraestructura',
   description:
     'Más de 30 años impulsando el agua con la fuerza del sol. Sistemas fotovoltaicos, obras hidráulicas e infraestructura sustentable en México.',
+  icons: {
+    icon: '/logo-mator.png',
+    apple: '/logo-mator.png',
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
