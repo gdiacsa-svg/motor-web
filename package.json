@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "publica": "powershell -Command \"git add . ; git commit -m \\\"Actualización $(Get-Date -Format 'dd/MM/yyyy HH:mm')\\\" ; git push\""
   },
   "dependencies": {
     "lucide-react": "^1.17.0",
