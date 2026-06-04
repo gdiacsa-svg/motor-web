@@ -574,6 +574,64 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .ftr-rfc  { font-size: 0.68rem; font-family: monospace; color: rgba(255,255,255,0.2); letter-spacing: 0.1em; }
 
 /* ═══════════════════════════════════════════════════════
+   NUESTRO TRABAJO
+═══════════════════════════════════════════════════════ */
+.ow-vid-section { background: var(--gray-bg); padding: var(--pad) 0; }
+.ow-gal-section { background: var(--white);   padding: var(--pad) 0; }
+
+.ow-sub {
+  font-size: 1rem; color: var(--text-2);
+  margin-top: 0.9rem; margin-bottom: 2.5rem; max-width: 600px;
+}
+
+.ow-vid-box,
+.ow-gal-box {
+  position: relative; padding: 0 3.5rem; margin-bottom: 1.5rem;
+}
+.ow-vid-box { max-width: 900px; margin-left: auto; margin-right: auto; margin-bottom: 1.5rem; }
+.ow-gal-box { margin-top: 2.5rem; }
+
+.ow-video {
+  width: 100%; display: block;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+}
+
+.ow-gal-track {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;
+}
+
+.ow-gal-img {
+  width: 100%; height: 280px; object-fit: cover;
+  border-radius: 8px; display: block;
+}
+
+.ow-arrow {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  width: 44px; height: 44px; border-radius: 50%;
+  background: var(--white); color: var(--navy);
+  display: flex; align-items: center; justify-content: center;
+  border: 1px solid var(--border);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  transition: background var(--ease), box-shadow var(--ease);
+  z-index: 2;
+}
+.ow-arrow:hover { background: var(--gray-bg); box-shadow: 0 4px 16px rgba(0,0,0,0.15); }
+.ow-arrow--prev { left: 0; }
+.ow-arrow--next { right: 0; }
+
+.ow-dots {
+  display: flex; gap: 0.45rem; justify-content: center;
+  flex-wrap: wrap; margin-top: 0.4rem;
+}
+.ow-dot {
+  width: 8px; height: 8px; border-radius: 50%; padding: 0;
+  background: rgba(26,58,107,0.2);
+  transition: background var(--ease), width var(--ease), border-radius var(--ease);
+}
+.ow-dot.active { background: var(--navy); width: 22px; border-radius: 4px; }
+
+/* ═══════════════════════════════════════════════════════
    RESPONSIVE
 ═══════════════════════════════════════════════════════ */
 @media (max-width: 1024px) {
@@ -596,6 +654,9 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   .timeline::before { top: 27px; left: 27px; right: auto; bottom: 27px; width: 1px; height: auto; }
   .tstep  { flex-direction: row; text-align: left; gap: 1.4rem; width: 100%; padding: 0 0 2rem 0; }
   .tnum   { flex-shrink: 0; margin-bottom: 0; }
+  .ow-gal-track { grid-template-columns: 1fr; }
+  .ow-gal-img:not(:first-child) { display: none; }
+  .ow-vid-box, .ow-gal-box { padding: 0 2.5rem; }
 }
 
 @media (max-width: 480px) {

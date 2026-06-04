@@ -3,6 +3,7 @@ import Hero        from '@/components/Hero';
 import Counters    from '@/components/Counters';
 import About       from '@/components/About';
 import Services    from '@/components/Services';
+import OurWork     from '@/components/OurWork';
 import Projects    from '@/components/Projects';
 import Coverage    from '@/components/Coverage';
 import Methodology from '@/components/Methodology';
@@ -20,6 +21,7 @@ export default function Home() {
         <Counters />
         <About />
         <Services />
+        <OurWork />
         <Projects />
         <Coverage />
         <Methodology />

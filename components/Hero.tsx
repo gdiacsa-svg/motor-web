@@ -1,7 +1,7 @@
 'use client';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
-const IMAGES = Array.from({ length: 15 }, (_, i) => `/carrusel${i + 1}.jpeg`);
+const IMAGES = Array.from({ length: 15 }, (_, i) => `/c${i + 1}.jpeg`);
 const INTERVAL = 4000;
 
 export default function Hero() {

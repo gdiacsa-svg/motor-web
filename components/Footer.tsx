@@ -14,7 +14,7 @@ export default function Footer() {
             <p className="ftr-slogan">&ldquo;Impulsamos el agua con la fuerza del sol.&rdquo;</p>
             <p className="ftr-brief">
               Av. Insurgentes Sur 700, Piso 9B, Del Valle Centro, CDMX<br />
-              grupomator2@gmail.com &nbsp;·&nbsp; 55 7933 1009
+              ventas@grupomator.mx &nbsp;·&nbsp; 55 7933 1009
             </p>
           </div>
 
@@ -36,7 +36,7 @@ export default function Footer() {
             <p>55 7933 1009</p>
             <p>55 2971 2799</p>
             <p>55 7217 2109</p>
-            <p style={{ marginTop: '0.6rem' }}>grupomator2@gmail.com</p>
+            <p style={{ marginTop: '0.6rem' }}>ventas@grupomator.mx</p>
           </div>
         </div>
 
