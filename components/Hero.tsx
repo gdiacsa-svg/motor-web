@@ -1,25 +1,78 @@
+'use client';
+import { useCallback, useEffect, useRef, useState } from 'react';
+
+const IMAGES = Array.from({ length: 15 }, (_, i) => `/carrusel${i + 1}.jpeg`);
+const INTERVAL = 4000;
+
 export default function Hero() {
+  const [current, setCurrent] = useState(0);
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  const startInterval = useCallback(() => {
+    if (intervalRef.current) clearInterval(intervalRef.current);
+    intervalRef.current = setInterval(() => {
+      setCurrent(c => (c + 1) % IMAGES.length);
+    }, INTERVAL);
+  }, []);
+
+  const goTo = useCallback((idx: number) => {
+    setCurrent(idx);
+    startInterval();
+  }, [startInterval]);
+
+  const goPrev = useCallback(() => {
+    setCurrent(c => (c - 1 + IMAGES.length) % IMAGES.length);
+    startInterval();
+  }, [startInterval]);
+
+  const goNext = useCallback(() => {
+    setCurrent(c => (c + 1) % IMAGES.length);
+    startInterval();
+  }, [startInterval]);
+
+  useEffect(() => {
+    startInterval();
+    return () => { if (intervalRef.current) clearInterval(intervalRef.current); };
+  }, [startInterval]);
+
   return (
     <section id="hero">
 
-      {/* Rayos de sol giratorios */}
-      <div className="sun-wrap" aria-hidden="true">
-        <div className="sun-rays" />
+      {/* Carousel background */}
+      <div className="carousel" aria-hidden="true">
+        {IMAGES.map((src, i) => (
+          <div
+            key={src}
+            className={`carousel-slide${i === current ? ' active' : ''}`}
+            style={{ backgroundImage: `url(${src})` }}
+          />
+        ))}
+        <div className="carousel-overlay" />
       </div>
 
-      {/* Destellos solares (lens flare) */}
-      <div className="flares" aria-hidden="true">
-        <div className="flare f1" /><div className="flare f2" /><div className="flare f3" />
-      </div>
+      {/* Arrow: Previous */}
+      <button
+        className="carousel-arrow carousel-arrow--prev"
+        onClick={goPrev}
+        aria-label="Imagen anterior"
+      >
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round" width="22" height="22" aria-hidden="true">
+          <path d="M15 18l-6-6 6-6"/>
+        </svg>
+      </button>
 
-      {/* Destellos pequeños (sparkles) */}
-      <div className="sparkles" aria-hidden="true">
-        <div className="sp sp1"  /><div className="sp sp2"  /><div className="sp sp3"  />
-        <div className="sp sp4"  /><div className="sp sp5"  /><div className="sp sp6"  />
-        <div className="sp sp7"  /><div className="sp sp8"  /><div className="sp sp9"  />
-        <div className="sp sp10" /><div className="sp sp11" /><div className="sp sp12" />
-      </div>
+      {/* Arrow: Next */}
+      <button
+        className="carousel-arrow carousel-arrow--next"
+        onClick={goNext}
+        aria-label="Imagen siguiente"
+      >
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round" width="22" height="22" aria-hidden="true">
+          <path d="M9 18l6-6-6-6"/>
+        </svg>
+      </button>
 
+      {/* Hero content */}
       <div className="wrap">
         <div className="hero-c">
           <p className="hero-eye">Tecnoservicios Mator S.A. de C.V.</p>
@@ -53,6 +106,21 @@ export default function Hero() {
         </div>
       </div>
 
+      {/* Dot indicators */}
+      <div className="carousel-dots" role="tablist" aria-label="Seleccionar imagen del carrusel">
+        {IMAGES.map((_, i) => (
+          <button
+            key={i}
+            className={`carousel-dot${i === current ? ' active' : ''}`}
+            onClick={() => goTo(i)}
+            role="tab"
+            aria-selected={i === current}
+            aria-label={`Imagen ${i + 1} de ${IMAGES.length}`}
+          />
+        ))}
+      </div>
+
+      {/* Scroll hint */}
       <div className="scroll-hint" aria-hidden="true">
         <div className="mouse" />
         <span>Scroll</span>
