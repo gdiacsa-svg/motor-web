@@ -61,8 +61,10 @@ export default function Counters() {
           {stats.map((s, i) => (
             <div key={s.label} className="cnt-item">
               <div className="cnt-num">
-                {s.prefix}{counts[i]}
-                {s.suffix && <span className="cnt-suf">{s.suffix}</span>}
+                <span className="cnt-val">
+                  {s.prefix}{counts[i]}
+                  {s.suffix && <span className="cnt-suf">{s.suffix}</span>}
+                </span>
               </div>
               <p className="cnt-lbl">{s.label}</p>
               <p className="cnt-sub">{s.sub}</p>

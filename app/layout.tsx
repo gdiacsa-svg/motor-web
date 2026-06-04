@@ -23,6 +23,7 @@ export const metadata: Metadata = {
     'Más de 30 años impulsando el agua con la fuerza del sol. Sistemas fotovoltaicos, obras hidráulicas e infraestructura sustentable en México.',
   icons: {
     icon: '/logo-mator.png',
+    shortcut: '/logo-mator.png',
     apple: '/logo-mator.png',
   },
 };

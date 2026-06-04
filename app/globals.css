@@ -343,7 +343,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .btn-s:hover { background: var(--white-05); border-color: var(--white-10); transform: translateY(-2px); }
 
 .btn-wa {
-  display: flex; align-items: center; gap: 0.5rem;
+  display: inline-flex; align-items: center; gap: 0.5rem;
   font-size: 1rem; font-weight: 700;
   letter-spacing: 0.1em; text-transform: uppercase;
   color: #ffffff; background: #25D366;
@@ -397,9 +397,10 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 }
 .cnt-item:hover::before { opacity: 1; }
 .cnt-num {
-  font-size: clamp(2.8rem, 4.5vw, 4.5rem);
+  font-size: 3.5rem;
   font-weight: 900; line-height: 1; color: var(--white); margin-bottom: 0.4rem;
 }
+.cnt-val { display: inline-flex; align-items: baseline; gap: 4px; white-space: nowrap; }
 .cnt-suf { color: var(--gold); }
 .cnt-lbl { font-size: 0.75rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--white-40); }
 .cnt-sub { font-size: 0.7rem; color: rgba(245,245,240,0.25); margin-top: 0.2rem; }
@@ -559,7 +560,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
    CONTACTO
 ═══════════════════════════════════════════════════════ */
 #contacto { padding: var(--pad) 0; background: var(--black-2); }
-.con-wa { margin-top: 1.8rem; }
+.con-wa { margin-top: 1.8rem; text-align: center; }
 .con-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; margin-top: 2.5rem; }
 .con-info h3 { font-size: 1rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--gold); margin-bottom: 1.4rem; }
 .cdetail { display: flex; gap: 1rem; align-items: flex-start; margin-bottom: 1.2rem; }
@@ -642,6 +643,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   .svc-grid { grid-template-columns: 1fr; }
   .prj-grid { grid-template-columns: 1fr; }
   .cnt-grid { grid-template-columns: repeat(2, 1fr); }
+  .cnt-num  { font-size: 2.5rem; }
   .states   { grid-template-columns: 1fr; }
   .ftr-top  { grid-template-columns: 1fr; }
   .btns     { flex-direction: column; }
