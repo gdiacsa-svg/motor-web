@@ -4,7 +4,7 @@ export default function About() {
       <div className="wrap">
         <p className="label r">Quiénes somos</p>
         <h2 className="title r d1">
-          La empresa que <span className="hi">mueve</span> México
+          Una empresa que promueve <span className="hi">energía limpia</span>
         </h2>
 
         <div className="about-grid">

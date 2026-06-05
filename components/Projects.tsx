@@ -1,5 +1,16 @@
 
-const projects = [
+type Project = {
+  src: string;
+  alt: string;
+  badge: string;
+  loc: string;
+  title: string;
+  desc: string;
+  delay: string;
+  isVideo?: boolean;
+};
+
+const projects: Project[] = [
   {
     src: '/industrial-roof.png',
     alt: 'Nave industrial Villacap — 400 paneles en techumbre, Altamira Tamaulipas',
@@ -13,9 +24,9 @@ const projects = [
     src: '/residential-aerial.png',
     alt: 'Proyecto residencial Santa Fe CDMX — vista aérea con paneles solares',
     badge: '42 kW',
-    loc: 'Santa Fe, CDMX',
+    loc: '',
     title: 'Desarrollo Residencial',
-    desc: '60 paneles con baterías de litio para sistema aislado. Autonomía energética total 24/7.',
+    desc: '60 paneles con baterías de litio para sistema aislado.',
     delay: 'd1',
   },
   {
@@ -45,6 +56,16 @@ const projects = [
     desc: '20 instalaciones para riego en la Riviera Maya. Mayor contrato de riego ejecutado a la fecha.',
     delay: 'd1',
   },
+  {
+    src: '/sistema-champoton.mp4',
+    alt: 'Sistema de riego agrícola Champotón Campeche',
+    badge: 'Agrícola',
+    loc: 'Champotón, Campeche',
+    title: 'Sistema de Riego Agrícola',
+    desc: 'Sistema fotovoltaico de bombeo para riego agrícola en zona rural. Operación autónoma sin consumo de diésel.',
+    delay: 'd2',
+    isVideo: true,
+  },
 ];
 
 export default function Projects() {
@@ -60,16 +81,27 @@ export default function Projects() {
           {projects.map((prj) => (
             <div key={prj.loc + prj.title} className={`prj r${prj.delay ? ` ${prj.delay}` : ''}`}>
               <div className="prj-img">
-                <img
-                  src={prj.src}
-                  alt={prj.alt}
-                  className="prj-photo"
-                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                />
+                {prj.isVideo ? (
+                  <video
+                    src={prj.src}
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                  />
+                ) : (
+                  <img
+                    src={prj.src}
+                    alt={prj.alt}
+                    className="prj-photo"
+                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                  />
+                )}
                 <span className="prj-badge">{prj.badge}</span>
               </div>
               <div className="prj-body">
-                <p className="prj-loc">{prj.loc}</p>
+                {prj.loc && <p className="prj-loc">{prj.loc}</p>}
                 <h3>{prj.title}</h3>
                 <p>{prj.desc}</p>
               </div>
