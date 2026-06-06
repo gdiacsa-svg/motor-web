@@ -28,7 +28,7 @@ export async function POST(request: Request) {
   console.log('[contact] reCAPTCHA OK — enviando correo con Resend…');
   try {
     const result = await resend.emails.send({
-      from: 'noreply@grupomator.mx',
+      from: 'Página Web grupomator.mx <noreply@grupomator.mx>',
       to: 'ventas@grupomator.mx',
       subject: `Nuevo contacto${empresa ? ` — ${empresa}` : ''}: ${nombre}`,
       replyTo: email,

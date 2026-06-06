@@ -12,10 +12,11 @@ function ContactForm() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (!executeRecaptcha) return;
+    if (!executeRecaptcha || !formRef.current) return;
+    const form = formRef.current;
+
     const token = await executeRecaptcha('contact_form');
 
-    const form = e.currentTarget;
     const payload = {
       nombre: (form.elements.namedItem('nombre') as HTMLInputElement).value,
       empresa: (form.elements.namedItem('empresa') as HTMLInputElement).value,
