@@ -693,3 +693,5 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 @media (max-width: 480px) {
   .scroll-top { bottom: 20px; right: 20px; width: 44px; height: 44px; }
 }
+
+.grecaptcha-badge { visibility: hidden !important; }

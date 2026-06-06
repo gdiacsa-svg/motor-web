@@ -152,6 +152,9 @@ function ContactForm() {
             >
               {status === 'sending' ? 'Enviando...' : 'Enviar solicitud'}
             </button>
+            <p className="text-xs text-gray-400 text-center mt-2">
+              Protegido por reCAPTCHA — <a href="https://policies.google.com/privacy" target="_blank" className="underline">Privacidad</a> y <a href="https://policies.google.com/terms" target="_blank" className="underline">Términos</a>
+            </p>
           </form>
 
         </div>
