@@ -15,7 +15,9 @@ function ContactForm() {
     if (!executeRecaptcha || !formRef.current) return;
     const form = formRef.current;
 
-    const token = await executeRecaptcha('contact_form');
+    console.log('[recaptcha] ejecutando...')
+    const token = await executeRecaptcha('contact_form')
+    console.log('[recaptcha] token:', token ? 'ok' : 'null/undefined')
 
     const payload = {
       nombre: (form.elements.namedItem('nombre') as HTMLInputElement).value,
