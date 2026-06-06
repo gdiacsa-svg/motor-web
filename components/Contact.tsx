@@ -1,19 +1,19 @@
 'use client';
 import { useRef, useState } from 'react';
-import ReCAPTCHA from 'react-google-recaptcha';
+import { GoogleReCaptchaProvider, useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 
 type Status = 'idle' | 'sending' | 'sent' | 'error';
 
-export default function Contact() {
+function ContactForm() {
   const [status, setStatus] = useState<Status>('idle');
   const formRef = useRef<HTMLFormElement>(null);
-  const recaptchaRef = useRef<ReCAPTCHA>(null);
+  const { executeRecaptcha } = useGoogleReCaptcha();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const token = recaptchaRef.current?.getValue();
-    if (!token) return;
+    if (!executeRecaptcha) return;
+    const token = await executeRecaptcha('contact_form');
 
     const form = e.currentTarget;
     const payload = {
@@ -36,7 +36,6 @@ export default function Contact() {
       if (res.ok) {
         setStatus('sent');
         formRef.current?.reset();
-        recaptchaRef.current?.reset();
         setTimeout(() => setStatus('idle'), 5000);
       } else {
         setStatus('error');
@@ -132,11 +131,6 @@ export default function Contact() {
               <textarea id="fmsg" name="mensaje" placeholder="Cuéntanos sobre tu proyecto, estado, tipo de obra y presupuesto estimado..." required />
             </div>
 
-            <ReCAPTCHA
-              ref={recaptchaRef}
-              sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}
-            />
-
             {status === 'sent' && (
               <p style={{ color: '#16a34a', fontWeight: 500 }}>
                 ¡Mensaje enviado! Nos pondremos en contacto pronto.
@@ -160,5 +154,13 @@ export default function Contact() {
         </div>
       </div>
     </section>
+  );
+}
+
+export default function Contact() {
+  return (
+    <GoogleReCaptchaProvider reCaptchaKey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}>
+      <ContactForm />
+    </GoogleReCaptchaProvider>
   );
 }

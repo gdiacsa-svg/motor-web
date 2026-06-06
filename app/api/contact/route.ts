@@ -3,8 +3,12 @@ import { Resend } from 'resend';
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(request: Request) {
-  const { nombre, empresa, email, mensaje, recaptchaToken } = await request.json();
+  const body = await request.json();
+  const { nombre, empresa, email, mensaje, recaptchaToken } = body;
 
+  console.log('[contact] payload recibido:', { nombre, empresa, email, recaptchaToken: recaptchaToken?.slice(0, 20) + '…' });
+
+  console.log('[contact] verificando reCAPTCHA…');
   const verifyRes = await fetch('https://www.google.com/recaptcha/api/siteverify', {
     method: 'POST',
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -14,13 +18,16 @@ export async function POST(request: Request) {
     }),
   });
   const verifyData = await verifyRes.json();
+  console.log('[contact] respuesta reCAPTCHA:', verifyData);
 
   if (!verifyData.success) {
+    console.log('[contact] reCAPTCHA inválido — abortando');
     return Response.json({ error: 'reCAPTCHA inválido' }, { status: 400 });
   }
 
+  console.log('[contact] reCAPTCHA OK — enviando correo con Resend…');
   try {
-    await resend.emails.send({
+    const result = await resend.emails.send({
       from: 'noreply@grupomator.mx',
       to: 'ventas@grupomator.mx',
       subject: `Nuevo contacto${empresa ? ` — ${empresa}` : ''}: ${nombre}`,
@@ -34,8 +41,10 @@ export async function POST(request: Request) {
         <p>${mensaje.replace(/\n/g, '<br>')}</p>
       `,
     });
+    console.log('[contact] Resend result:', result);
     return Response.json({ ok: true });
-  } catch {
+  } catch (err) {
+    console.error('[contact] error Resend:', err);
     return Response.json({ error: 'Error al enviar correo' }, { status: 500 });
   }
 }
