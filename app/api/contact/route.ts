@@ -18,6 +18,7 @@ export async function POST(request: Request) {
     }),
   });
   const verifyData = await verifyRes.json();
+  console.log('[recaptcha response]', JSON.stringify(verifyData));
   console.log('[contact] respuesta reCAPTCHA:', verifyData);
 
   if (!verifyData.success) {
