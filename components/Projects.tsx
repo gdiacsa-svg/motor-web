@@ -30,7 +30,7 @@ const projects: Project[] = [
     delay: 'd1',
   },
   {
-    src: '/installation.png?v=2',
+    src: '/installation.png',
     alt: 'Instalación de sistema de riego solar en Yucatán 2022',
     badge: '12 Sistemas',
     loc: 'Yucatán — 2022',

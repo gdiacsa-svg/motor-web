@@ -1,17 +1,49 @@
 'use client';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
+import ReCAPTCHA from 'react-google-recaptcha';
+
+type Status = 'idle' | 'sending' | 'sent' | 'error';
 
 export default function Contact() {
-  const [status, setStatus] = useState<'idle' | 'sending' | 'sent'>('idle');
+  const [status, setStatus] = useState<Status>('idle');
+  const formRef = useRef<HTMLFormElement>(null);
+  const recaptchaRef = useRef<ReCAPTCHA>(null);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    const token = recaptchaRef.current?.getValue();
+    if (!token) return;
+
+    const form = e.currentTarget;
+    const payload = {
+      nombre: (form.elements.namedItem('nombre') as HTMLInputElement).value,
+      empresa: (form.elements.namedItem('empresa') as HTMLInputElement).value,
+      email: (form.elements.namedItem('email') as HTMLInputElement).value,
+      mensaje: (form.elements.namedItem('mensaje') as HTMLTextAreaElement).value,
+      recaptchaToken: token,
+    };
+
     setStatus('sending');
-    setTimeout(() => {
-      setStatus('sent');
-      (e.target as HTMLFormElement).reset();
-      setTimeout(() => setStatus('idle'), 3500);
-    }, 1200);
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+
+      if (res.ok) {
+        setStatus('sent');
+        formRef.current?.reset();
+        recaptchaRef.current?.reset();
+        setTimeout(() => setStatus('idle'), 5000);
+      } else {
+        setStatus('error');
+      }
+    } catch {
+      setStatus('error');
+    }
   };
 
   return (
@@ -82,7 +114,7 @@ export default function Contact() {
           </div>
 
           {/* Columna derecha */}
-          <form className="form r d2" onSubmit={handleSubmit} noValidate>
+          <form ref={formRef} className="form r d2" onSubmit={handleSubmit} noValidate>
             <div className="fg">
               <label htmlFor="fn">Nombre completo</label>
               <input type="text" id="fn" name="nombre" placeholder="Ej. Juan García López" required autoComplete="name" />
@@ -99,15 +131,29 @@ export default function Contact() {
               <label htmlFor="fmsg">Describe tu proyecto</label>
               <textarea id="fmsg" name="mensaje" placeholder="Cuéntanos sobre tu proyecto, estado, tipo de obra y presupuesto estimado..." required />
             </div>
+
+            <ReCAPTCHA
+              ref={recaptchaRef}
+              sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}
+            />
+
+            {status === 'sent' && (
+              <p style={{ color: '#16a34a', fontWeight: 500 }}>
+                ¡Mensaje enviado! Nos pondremos en contacto pronto.
+              </p>
+            )}
+            {status === 'error' && (
+              <p style={{ color: '#dc2626', fontWeight: 500 }}>
+                Ocurrió un error. Intenta de nuevo o escríbenos por WhatsApp.
+              </p>
+            )}
+
             <button
               type="submit"
               className="btn-send"
-              disabled={status === 'sending'}
-              style={status === 'sent' ? { background: '#16a34a' } : undefined}
+              disabled={status === 'sending' || status === 'sent'}
             >
-              {status === 'idle' && 'Enviar solicitud'}
-              {status === 'sending' && 'Enviando…'}
-              {status === 'sent' && '✓ Mensaje enviado'}
+              {status === 'sending' ? 'Enviando...' : 'Enviar solicitud'}
             </button>
           </form>
 
