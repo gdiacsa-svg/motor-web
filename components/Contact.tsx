@@ -63,7 +63,7 @@ function ContactForm() {
 
             <div className="con-wa">
               <a
-                href="https://wa.me/529999501061?text=Hola%2C%20me%20interesa%20recibir%20información%20sobre%20sus%20servicios%20de%20energía%20solar%20e%20hidráulica.%20¿Me%20pueden%20apoyar%3F"
+                href="https://wa.me/525572172109?text=Hola%2C%20me%20interesa%20recibir%20información%20sobre%20sus%20servicios%20de%20energía%20solar%20e%20hidráulica.%20¿Me%20pueden%20apoyar%3F"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-wa"
