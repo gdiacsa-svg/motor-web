@@ -11,7 +11,7 @@ export default function Footer() {
               className="ftr-logo"
             />
             <p className="ftr-bname">Tecnoservicios Mator S.A. de C.V.</p>
-            <p className="ftr-slogan">&ldquo;Impulsamos el agua con la fuerza del sol.&rdquo;</p>
+            <p className="ftr-slogan">&ldquo;Impulsamos la energía solar.&rdquo;</p>
             <p className="ftr-brief">
               Av. Insurgentes Sur 700, Piso 9B, Del Valle Centro, CDMX<br />
               ventas@grupomator.mx &nbsp;·&nbsp; 55 7933 1009

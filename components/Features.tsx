@@ -24,7 +24,7 @@ const cards = [
   {
     Icon: Droplets,
     title: 'Infraestructura Agrícola',
-    subtitle: 'Impulsamos el agua con la fuerza del sol',
+    subtitle: 'Impulsamos la energía solar',
     description:
       'Especialistas en bombeo solar para riego tecnificado. Instalamos sistemas con bombas de hasta 10 HP alimentadas 100 % por energía solar, eliminando el consumo diésel y optimizando la productividad del campo.',
     stat: '10 HP',
