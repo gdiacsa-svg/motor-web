@@ -78,9 +78,8 @@ export default function Hero() {
           <p className="hero-eye">Tecnoservicios Mator S.A. de C.V.</p>
           <h1 className="hero-h1">
             Impulsamos<br />
-            el <span className="bl">agua</span><br />
-            con la fuerza<br />
-            del <span className="go">sol</span>
+            la <span className="bl">energía</span><br />
+            <span className="go">solar</span>
           </h1>
           <p className="hero-sub">
             Sistemas fotovoltaicos

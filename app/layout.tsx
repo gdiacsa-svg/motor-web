@@ -20,7 +20,7 @@ const barlowCondensed = Barlow_Condensed({
 export const metadata: Metadata = {
   title: 'Tecnoservicios Mator S.A. de C.V. | Energía Solar e Infraestructura',
   description:
-    'Más de 30 años impulsando el agua con la fuerza del sol. Sistemas fotovoltaicos, obras hidráulicas e infraestructura sustentable en México.',
+    'Más de 30 años impulsando la energía solar. Sistemas fotovoltaicos, obras hidráulicas e infraestructura sustentable en México.',
   icons: {
     icon: '/favicon.png',
     shortcut: '/favicon.png',
